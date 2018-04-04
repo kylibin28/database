@@ -26,8 +26,8 @@ public class Address {
     private Integer buildingNumber;
 
     @ManyToOne
-    @JoinColumn(name = "distinctName")
-    private District distinctName;
+    @JoinColumn(name = "districtName")
+    private District districtName;
 
     @OneToMany(mappedBy = "addressId")
     private Set<OrganisationPhone> organisationPhone = new HashSet<OrganisationPhone>();
@@ -35,12 +35,12 @@ public class Address {
     @OneToMany(mappedBy = "addressId")
     private Set<PersonPhone> personPhone = new HashSet<PersonPhone>();
 
-    public Address(String sity, Integer index, String street, Integer buildingNumber, District distinctName) {
+    public Address(String sity, Integer index, String street, Integer buildingNumber, District districtName) {
         this.sity = sity;
         this.index = index;
         this.street = street;
         this.buildingNumber = buildingNumber;
-        this.distinctName = distinctName;
+        this.districtName = districtName;
     }
 
     public Address() {
@@ -66,8 +66,8 @@ public class Address {
         return buildingNumber;
     }
 
-    public District getDistinctName() {
-        return distinctName;
+    public District getDistrictName() {
+        return districtName;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Address {
                 ", index=" + index +
                 ", street='" + street + '\'' +
                 ", buildingNumber=" + buildingNumber +
-                ", distinctName=" + distinctName +
+                ", districtName=" + districtName +
                 '}';
     }
 }

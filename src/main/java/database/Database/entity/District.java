@@ -9,21 +9,21 @@ import java.util.Set;
 public class District {
 
     @Id
-    @Column(name = "distinctName", length = 100)
-    private String distinctName;
+    @Column(name = "districtName", length = 100)
+    private String districtName;
 
-    @OneToMany(mappedBy = "distinctName")
+    @OneToMany(mappedBy = "districtName")
     private Set<Address> address = new HashSet<Address>();
 
-    public District(String distinctName) {
-        this.distinctName = distinctName;
+    public District(String districtName) {
+        this.districtName = districtName;
     }
 
     public District() {
     }
 
-    public String getDistinctName() {
-        return distinctName;
+    public String getDistrictName() {
+        return districtName;
     }
 
     public Set<Address> getAddress() {
@@ -33,7 +33,7 @@ public class District {
     @Override
     public String toString() {
         return "District{" +
-                "distinctName='" + distinctName + '\'' +
+                "districtName='" + districtName + '\'' +
                 '}';
     }
 }

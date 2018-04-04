@@ -21,7 +21,7 @@ public class TestClass {
     private ATSService atsService;
 
     @Autowired
-    private DistinctService distinctService;
+    private DistrictService districtService;
 
     @Autowired
     private OrganisationPhoneService organisationPhoneService;
@@ -46,11 +46,11 @@ public class TestClass {
 
     @Test
     public void add() {
-        distinctService.save(new District("Железнодорожный"));
+        districtService.save(new District("Железнодорожный"));
         rateService.save(new Rate(new Date(System.currentTimeMillis()), 190));
         atsService.save(new ATS(1));
         personService.save(new Person(432, "Аверкиев Максим Константинович", true));
-        addressService.save(new Address("Самара", 443013, "Киевская", 10, distinctService.findById("Железнодорожный")));
+        addressService.save(new Address("Самара", 443013, "Киевская", 10, districtService.findById("Железнодорожный")));
         organisationService.save(new Organisation(123, "IT-universe"));
         phoneService.save(new Phone(3409032, true, atsService.findById(1)));
         organisationPhoneService.save(new OrganisationPhone(2, 123, 3409032));
@@ -65,7 +65,7 @@ public class TestClass {
 
     @Test
     public void selectAll() {
-        distinctService.findAll().forEach(item -> System.out.println(item.toString()));
+        districtService.findAll().forEach(item -> System.out.println(item.toString()));
         rateService.findAll().forEach(item -> System.out.println(item.toString()));
         atsService.findAll().forEach(item -> System.out.println(item.toString()));
         personService.findAll().forEach(item -> System.out.println(item.toString()));

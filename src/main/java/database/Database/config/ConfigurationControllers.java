@@ -1,6 +1,6 @@
 package database.Database.config;
 
-import database.Database.controller.AddressController;
+import database.Database.controller.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +21,8 @@ public class ConfigurationControllers {
      * и заставили его произвести все необходимые инъекции.
      */
     @Bean
-    public AddressController getMainController() throws IOException {
-        return (AddressController) getMainView().getController();
+    public MainController getMainController() throws IOException {
+        return (MainController) getMainView().getController();
     }
 
     /**
