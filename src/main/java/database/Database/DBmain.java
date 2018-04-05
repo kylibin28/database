@@ -23,7 +23,7 @@ public class DBmain extends AbstractJavaFxApplicationSupport {
     @Override
     public void start(Stage stage) throws Exception{
         try {
-            stage.setTitle("");
+            stage.setTitle("Телефонная сеть города");
             stage.setScene(new Scene(view.getView()));
             stage.setResizable(true);
             stage.centerOnScreen();

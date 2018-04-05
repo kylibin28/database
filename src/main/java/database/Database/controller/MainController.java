@@ -75,7 +75,7 @@ public class MainController {
 
         TableColumn<Address, String> idColumn = new TableColumn<>("Код адреса");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("addressId"));
-        idColumn.setPrefWidth(50);
+        idColumn.setPrefWidth(70);
 
         TableColumn<Address, String> nameColumn = new TableColumn<>("Город");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("sity"));
@@ -101,24 +101,24 @@ public class MainController {
         directoryTableView.setItems(list);
 
         TextField nameTextField = new TextField();
-        nameTextField.setLayoutX(50);
+        nameTextField.setLayoutX(70);
         nameTextField.setPrefWidth(150);
 
         TextField indexTextField = new TextField();
-        indexTextField.setLayoutX(200);
+        indexTextField.setLayoutX(220);
         indexTextField.setPrefWidth(100);
 
         TextField streetTextField = new TextField();
-        streetTextField.setLayoutX(300);
+        streetTextField.setLayoutX(320);
         streetTextField.setPrefWidth(150);
 
         TextField buildingTextField = new TextField();
-        buildingTextField.setLayoutX(450);
+        buildingTextField.setLayoutX(470);
         buildingTextField.setPrefWidth(50);
 
         ObservableList<District> districtObservableList = FXCollections.observableArrayList(districtService.findAll());
         ComboBox districtComboBox = new ComboBox(districtObservableList);
-        districtComboBox.setLayoutX(500);
+        districtComboBox.setLayoutX(520);
         districtComboBox.setPrefWidth(150);
 
         Button addButton = new Button("Добавить");
@@ -128,7 +128,7 @@ public class MainController {
                     Integer.valueOf(buildingTextField.getText()), (District)districtComboBox.getValue()));
             AddressDirectoryAction();
         });
-        addButton.setLayoutX(650);
+        addButton.setLayoutX(670);
         additionPane.getChildren().clear();
         additionPane.getChildren().addAll(nameTextField, indexTextField, streetTextField, buildingTextField, districtComboBox, addButton);
     }
@@ -175,7 +175,7 @@ public class MainController {
 
         TableColumn<Person, String> FIO = new TableColumn<>("ФИО");
         FIO.setCellValueFactory(new PropertyValueFactory<>("FIO"));
-        FIO.setPrefWidth(150);
+        FIO.setPrefWidth(250);
 
         TableColumn<Person, String> privilege = new TableColumn<>("Наличие льгот");
         privilege.setCellValueFactory(new PropertyValueFactory<>("privilege"));
@@ -189,17 +189,17 @@ public class MainController {
 
         TextField FIOTextField = new TextField();
         FIOTextField.setLayoutX(100);
-        FIOTextField.setPrefWidth(150);
+        FIOTextField.setPrefWidth(250);
 
         CheckBox privilegeCheckBox = new CheckBox();
-        privilegeCheckBox.setLayoutX(300);
+        privilegeCheckBox.setLayoutX(400);
 
         Button addButton = new Button("Добавить");
         addButton.setOnAction(e -> {
             personService.save(new Person(Integer.valueOf(pasportNumberTextField.getText()), FIOTextField.getText(), privilegeCheckBox.isSelected()));
             PersoneDirectoryAction();
         });
-        addButton.setLayoutX(360);
+        addButton.setLayoutX(460);
         additionPane.getChildren().clear();
         additionPane.getChildren().addAll(pasportNumberTextField, FIOTextField, privilegeCheckBox, addButton);
     }
