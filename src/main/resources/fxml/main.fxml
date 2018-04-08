@@ -15,7 +15,7 @@
               <MenuItem mnemonicParsing="false" onAction="#ATSDirectoryAction" text="Сведения об АТС" />
                   <MenuItem mnemonicParsing="false" onAction="#AddressDirectoryAction" text="Сведения об адресах" />
                   <MenuItem mnemonicParsing="false" onAction="#OrganizationDirectoryAction" text="Сведения об организациях" />
-                  <MenuItem mnemonicParsing="false" onAction="#PersoneDirectoryAction" text="Сведения о частных лицах" />
+                  <MenuItem mnemonicParsing="false" onAction="#PersonDirectoryAction" text="Сведения о частных лицах" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Оперативные данные">
