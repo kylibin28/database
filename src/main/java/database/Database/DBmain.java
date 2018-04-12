@@ -24,7 +24,10 @@ public class DBmain extends AbstractJavaFxApplicationSupport {
     public void start(Stage stage) throws Exception{
         try {
             stage.setTitle("Телефонная сеть города");
-            stage.setScene(new Scene(view.getView()));
+            Scene scene = new Scene(view.getView());
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add("css/mainstyle.css");
+            stage.setScene(scene);
             stage.setResizable(true);
             stage.centerOnScreen();
             stage.show();

@@ -1,7 +1,6 @@
 package database.Database.controller;
 
 import database.Database.entity.Person;
-import database.Database.repository.PersonRepository;
 import database.Database.service.PersonService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -82,5 +81,16 @@ public class PersonController implements Controllers{
     @Override
     public void updateRecord() {
 //        additionTextField.setText(String.valueOf(((ATS) directoryTableView.getSelectionModel().getSelectedItem()).getAtsId()));
+    }
+
+
+    @Override
+    public void apply(){
+
+    }
+
+    @Override
+    public void undo(){
+
     }
 }

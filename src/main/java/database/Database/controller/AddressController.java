@@ -79,10 +79,10 @@ public class AddressController implements Controllers {
 
         AddButton addButton = new AddButton(this, 670, 75);
 
-        DeleteButton deleteButton = new DeleteButton(this, 750, 75);
+//        DeleteButton deleteButton = new DeleteButton(this, 750, 75);
 
         additionPane.getChildren().clear();
-        additionPane.getChildren().addAll(nameTextField, indexTextField, streetTextField, buildingTextField, districtComboBox, addButton, deleteButton);
+//        additionPane.getChildren().addAll(nameTextField, indexTextField, streetTextField, buildingTextField, districtComboBox, addButton, deleteButton);
 
     }
 
@@ -101,6 +101,16 @@ public class AddressController implements Controllers {
 
     @Override
     public void updateRecord() {
+
+    }
+
+    @Override
+    public void apply(){
+
+    }
+
+    @Override
+    public void undo(){
 
     }
 }

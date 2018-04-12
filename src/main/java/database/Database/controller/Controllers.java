@@ -10,6 +10,10 @@ public interface Controllers {
 
     public void updateRecord();
 
+    public void undo();
+
+    public void apply();
+
 
 
 }

@@ -41,7 +41,17 @@
             </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="directoryTableView" layoutX="14.0" layoutY="36.0" prefHeight="444.0" prefWidth="773.0" />
+      <TableView fx:id="directoryTableView" layoutX="14.0" layoutY="36.0" prefHeight="444.0" prefWidth="773.0">
+         <columns>
+            <TableColumn fx:id="atsIdTableColumn" prefWidth="170.0" text="Номер АТС" />
+            <TableColumn minWidth="0.0" prefWidth="0.0" text="Редактирование">
+               <columns>
+                  <TableColumn fx:id="atsApplyTableColumn" prefWidth="24.0" />
+                  <TableColumn fx:id="atsUndoTableColumn" prefWidth="23.0" />
+                  <TableColumn fx:id="atsDeleteTableColumn" prefWidth="25.0" />
+               </columns>
+            </TableColumn>
+         </columns></TableView>
       <Pane fx:id="additionPane" layoutX="14.0" layoutY="486.0" prefHeight="63.0" prefWidth="773.0" />
    </children>
 </AnchorPane>

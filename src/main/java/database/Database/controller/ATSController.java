@@ -1,72 +1,109 @@
 package database.Database.controller;
 
 import database.Database.entity.ATS;
-import database.Database.navigateElements.AddButton;
-import database.Database.navigateElements.CustomTextField;
-import database.Database.navigateElements.DeleteButton;
-import database.Database.repository.ATSRepository;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import database.Database.navigateElements.*;
+import database.Database.service.ATSService;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 public class ATSController implements Controllers {
 
     @FXML
-    private TableView directoryTableView;
-
-    @FXML
     private Pane additionPane;
 
 
-    private ATSRepository atsService;
+    private ATS ats;
 
-    public ATSController(TableView directoryTableView, Pane additionPane, ATSRepository atsService) {
-        this.directoryTableView = directoryTableView;
+    private ATSService atsService;
+
+
+
+    private ApplyButton applyButton;
+    private UndoButton undoButton;
+    private DeleteButton deleteButton;
+    private ATSNumberTextField ATSNumberTextField;
+
+
+    public ATSController(Pane additionPane, ATS ats, ATSService atsService) {
         this.additionPane = additionPane;
+        this.ats = ats;
         this.atsService = atsService;
+
+        generateElements();
     }
 
-    CustomTextField additionTextField = new CustomTextField(0, 100);
+    private void generateElements(){
+        applyButton = new ApplyButton(this);
+        undoButton = new UndoButton(this);
+        deleteButton = new DeleteButton(this);
+        ATSNumberTextField = new ATSNumberTextField(this);
+        ATSNumberTextField.setText(String.valueOf(ats.getAtsId()));
+    }
+
+
 
     @Override
     public void setTable() {
-        ObservableList<ATS> list = FXCollections.observableArrayList(atsService.findAll());
-
-        TableColumn<ATS, String> atsId = new TableColumn<>("Номер АТС");
-        atsId.setPrefWidth(100);
-        atsId.setCellValueFactory(new PropertyValueFactory<>("atsId"));
-
-        directoryTableView.getColumns().setAll(atsId);
-        directoryTableView.setItems(list);
-
-
-        AddButton addButton = new AddButton(this, 110, 75);
-
-        DeleteButton deleteButton = new DeleteButton(this, 170, 75);
-
-
-        additionPane.getChildren().clear();
-        additionPane.getChildren().addAll(additionTextField, addButton, deleteButton);
+//        ObservableList<ATS> list = FXCollections.observableArrayList(atsService.findAll());
+//
+//        TableColumn<ATS, String> atsId = new TableColumn<>("Номер АТС");
+//        atsId.setPrefWidth(100);
+//        atsId.setCellValueFactory(new PropertyValueFactory<>("atsId"));
+//
+//        directoryTableView.getColumns().setAll(atsId);
+//        directoryTableView.setItems(list);
+//
+//
+//        AddButton addButton = new AddButton(this, 110, 75);
+//
+//        DeleteButton deleteButton = new DeleteButton(this, 170, 75);
+//
+//
+//        additionPane.getChildren().clear();
+//        additionPane.getChildren().addAll(additionTextField, addButton, deleteButton);
     }
 
     @Override
     public void addRecord() {
-        atsService.save(new ATS(Integer.valueOf(additionTextField.getText())));
-        setTable();
     }
 
     @Override
     public void deleteRecord() {
-        atsService.delete((ATS) directoryTableView.getSelectionModel().getSelectedItem());
-        setTable();
+        atsService.delete(ats);
     }
 
     @Override
     public void updateRecord() {
-        additionTextField.setText(String.valueOf(((ATS) directoryTableView.getSelectionModel().getSelectedItem()).getAtsId()));
+
+    }
+
+    @Override
+    public void apply(){
+
+    }
+
+    @Override
+    public void undo(){
+
+    }
+
+    public void setApplyButtonDisable(Boolean isDisable){
+
+    }
+
+    public ApplyButton getApplyButton() {
+        return applyButton;
+    }
+
+    public UndoButton getUndoButton() {
+        return undoButton;
+    }
+
+    public DeleteButton getDeleteButton() {
+        return deleteButton;
+    }
+
+    public database.Database.navigateElements.ATSNumberTextField getATSNumberTextField() {
+        return ATSNumberTextField;
     }
 }

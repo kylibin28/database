@@ -3,15 +3,15 @@ package database.Database.navigateElements;
 import database.Database.controller.Controllers;
 import javafx.scene.control.Button;
 
-public class DeleteButton<T extends Controllers> extends Button {
+public class ApplyButton<T extends Controllers> extends Button {
 
-    public DeleteButton(T controller) {
+    public ApplyButton(T controller) {
         super();
 
-        this.getStyleClass().add("button-small-remove");
+        this.getStyleClass().add("button-small-apply");
 
         this.setOnAction(t -> {
-            controller.deleteRecord();
+            controller.apply();
         });
     }
 }
