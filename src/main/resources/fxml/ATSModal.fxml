@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="database.Database.controller.modalWindows.ATSModalController">
+   <children>
+      <TextField fx:id="atsTextField" layoutX="24.0" layoutY="118.0" prefHeight="25.0" prefWidth="255.0" />
+      <Label layoutX="24.0" layoutY="95.0" text="Введите номер АТС" />
+      <Label layoutX="127.0" layoutY="22.0" text="АТС">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="applyButton" layoutX="24.0" layoutY="339.0" mnemonicParsing="false" onAction="#applyButtonAction" prefHeight="25.0" prefWidth="83.0" text="OK" />
+      <Button layoutX="140.0" layoutY="339.0" mnemonicParsing="false" onAction="#undoButtonAction" prefHeight="25.0" prefWidth="75.0" text="Отменить" />
+   </children>
+</AnchorPane>

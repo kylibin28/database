@@ -1,6 +1,9 @@
 package database.Database.controller;
 
 import database.Database.entity.Person;
+import database.Database.navigateElements.ApplyButton;
+import database.Database.navigateElements.DeleteButton;
+import database.Database.navigateElements.UndoButton;
 import database.Database.service.PersonService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +21,11 @@ public class PersonController implements Controllers{
     private Pane additionPane;
 
     private PersonService personService;
+
+
+    private ApplyButton applyButton;
+    private UndoButton undoButton;
+    private DeleteButton deleteButton;
 
     public PersonController (TableView directoryTableView, Pane additionPane, PersonService personService) {
         this.directoryTableView = directoryTableView;
@@ -92,5 +100,11 @@ public class PersonController implements Controllers{
     @Override
     public void undo(){
 
+    }
+
+    @Override
+    public void setApplyButtonDisable(Boolean isDisable) {
+        applyButton.setDisable(isDisable);
+        undoButton.setDisable(isDisable);
     }
 }

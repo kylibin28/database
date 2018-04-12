@@ -1,19 +1,26 @@
 package database.Database.controller;
 
+import database.Database.controller.modalWindows.AddressModalController;
 import database.Database.entity.Address;
 import database.Database.entity.District;
-import database.Database.navigateElements.AddButton;
-import database.Database.navigateElements.CustomComboBox;
-import database.Database.navigateElements.DeleteButton;
-import database.Database.navigateElements.CustomTextField;
+import database.Database.navigateElements.*;
 import database.Database.repository.AddressRepository;
 import database.Database.repository.DistrictRepository;
+import database.Database.service.DistrictService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class AddressController implements Controllers {
 
@@ -26,7 +33,7 @@ public class AddressController implements Controllers {
 
     private AddressRepository addressService;
 
-    private DistrictRepository districtService;
+    private DistrictService districtService;
 
 
     private CustomTextField nameTextField = new CustomTextField(70, 150);
@@ -35,7 +42,12 @@ public class AddressController implements Controllers {
     private CustomTextField buildingTextField = new CustomTextField(470, 50);
     private CustomComboBox districtComboBox;
 
-    public AddressController(TableView directoryTableView, Pane additionPane, AddressRepository addressService, DistrictRepository districtService) {
+
+    private ApplyButton applyButton;
+    private UndoButton undoButton;
+    private DeleteButton deleteButton;
+
+    public AddressController(TableView directoryTableView, Pane additionPane, AddressRepository addressService, DistrictService districtService) {
         this.directoryTableView = directoryTableView;
         this.additionPane = additionPane;
         this.addressService = addressService;
@@ -43,6 +55,19 @@ public class AddressController implements Controllers {
 
         ObservableList<District> districtObservableList = FXCollections.observableArrayList(districtService.findAll());
         districtComboBox = new CustomComboBox(districtObservableList, 520, 150);
+
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem itemCreate = new MenuItem("Создать");
+        MenuItem itemEdit = new MenuItem("Редактировать");
+        MenuItem itemDelete = new MenuItem("Удалить");
+        itemCreate.setOnAction(event -> openModal((Address) directoryTableView.getSelectionModel().getSelectedItem()));
+        itemEdit.setOnAction(event -> openModal(null));
+        itemDelete.setOnAction(event -> deleteRecord());
+
+        contextMenu.getItems().addAll(itemCreate, itemEdit, itemDelete);
+        directoryTableView.setOnContextMenuRequested(event ->
+                contextMenu.show(directoryTableView, event.getScreenX(), event.getScreenY()));
+        directoryTableView.setOnMouseClicked(event -> contextMenu.hide());
     }
 
     @Override
@@ -70,19 +95,11 @@ public class AddressController implements Controllers {
         buildingColumn.setPrefWidth(50);
 
         TableColumn<Address, String> districtColumn = new TableColumn<>("Название района");
-        districtColumn.setCellValueFactory(new PropertyValueFactory<>("distinctName"));
+        districtColumn.setCellValueFactory(new PropertyValueFactory<>("districtName"));
         districtColumn.setPrefWidth(150);
 
         directoryTableView.getColumns().setAll(idColumn, nameColumn, indexColumn, streetColumn, buildingColumn, districtColumn);
         directoryTableView.setItems(list);
-
-
-        AddButton addButton = new AddButton(this, 670, 75);
-
-//        DeleteButton deleteButton = new DeleteButton(this, 750, 75);
-
-        additionPane.getChildren().clear();
-//        additionPane.getChildren().addAll(nameTextField, indexTextField, streetTextField, buildingTextField, districtComboBox, addButton, deleteButton);
 
     }
 
@@ -105,12 +122,41 @@ public class AddressController implements Controllers {
     }
 
     @Override
-    public void apply(){
+    public void apply() {
 
     }
 
     @Override
-    public void undo(){
+    public void undo() {
 
+    }
+
+    @Override
+    public void setApplyButtonDisable(Boolean isDisable) {
+        applyButton.setDisable(isDisable);
+        undoButton.setDisable(isDisable);
+    }
+
+    private void openModal(Address address) {
+        try {
+            Stage primaryStage = new Stage();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Object.class.getResource("/fxml/AddressModal.fxml"));
+
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+
+            AddressModalController controller = loader.getController();
+            controller.additionalInit(primaryStage, address, districtService);
+
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

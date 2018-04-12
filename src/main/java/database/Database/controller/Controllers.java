@@ -14,6 +14,8 @@ public interface Controllers {
 
     public void apply();
 
+    public void setApplyButtonDisable(Boolean isDisable);
+
 
 
 }

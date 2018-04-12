@@ -4,6 +4,7 @@ import database.Database.entity.ATS;
 import database.Database.navigateElements.*;
 import database.Database.service.ATSService;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 public class ATSController implements Controllers {
@@ -17,10 +18,9 @@ public class ATSController implements Controllers {
     private ATSService atsService;
 
 
-
-    private ApplyButton applyButton;
-    private UndoButton undoButton;
-    private DeleteButton deleteButton;
+    private Button applyButton;
+    private Button undoButton;
+    private Button deleteButton;
     private ATSNumberTextField ATSNumberTextField;
 
 
@@ -32,14 +32,18 @@ public class ATSController implements Controllers {
         generateElements();
     }
 
-    private void generateElements(){
+    private void generateElements() {
         applyButton = new ApplyButton(this);
         undoButton = new UndoButton(this);
         deleteButton = new DeleteButton(this);
         ATSNumberTextField = new ATSNumberTextField(this);
-        ATSNumberTextField.setText(String.valueOf(ats.getAtsId()));
+       refresh();
+        setApplyButtonDisable(true);
     }
 
+    public void refresh(){
+        ATSNumberTextField.setText(String.valueOf(ats.getAtsId()));
+    }
 
 
     @Override
@@ -78,28 +82,32 @@ public class ATSController implements Controllers {
     }
 
     @Override
-    public void apply(){
-
+    public void apply() {
+        ats.setAtsId(Integer.valueOf(ATSNumberTextField.getText()));
+        atsService.save(ats);
+        setApplyButtonDisable(true);
     }
 
     @Override
-    public void undo(){
-
+    public void undo() {
+        refresh();
+        setApplyButtonDisable(true);
     }
 
-    public void setApplyButtonDisable(Boolean isDisable){
-
+    public void setApplyButtonDisable(Boolean isDisable) {
+        applyButton.setDisable(isDisable);
+        undoButton.setDisable(isDisable);
     }
 
-    public ApplyButton getApplyButton() {
+    public Button getApplyButton() {
         return applyButton;
     }
 
-    public UndoButton getUndoButton() {
+    public Button getUndoButton() {
         return undoButton;
     }
 
-    public DeleteButton getDeleteButton() {
+    public Button getDeleteButton() {
         return deleteButton;
     }
 

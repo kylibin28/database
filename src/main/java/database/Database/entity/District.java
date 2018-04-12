@@ -32,8 +32,6 @@ public class District {
 
     @Override
     public String toString() {
-        return "District{" +
-                "districtName='" + districtName + '\'' +
-                '}';
+        return districtName;
     }
 }

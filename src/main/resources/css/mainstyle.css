@@ -39,57 +39,6 @@
             -fx-mid-text-color   60%
         );*/
 
-    -fx-text-inner-color: ladder(
-            -fx-control-inner-background,
-            -fx-light-text-color 56%,
-            -fx-dark-text-color 57%,
-            -fx-dark-text-color 70%,
-            -fx-mid-text-color 71%
-    ); /**/
-    -custom-text-inner-color-disabled: ladder(
-            -fx-control-inner-background,
-            derive(-fx-control-inner-background, 30%) 56%,
-            derive(-fx-control-inner-background, -30%) 57% /**/ /*        derive(-fx-text-inner-color,-25%) 56%,
-        derive(-fx-text-inner-color,50%) 57% /**/
-    ); /**/
-    -custom-prompt-text-color: ladder(
-            -fx-control-inner-background,
-            derive(-fx-control-inner-background, 20%) 56%,
-            derive(-fx-control-inner-background, -20%) 57% /**/ /*        derive(-fx-text-inner-color,-35%) 56%,
-        derive(-fx-text-inner-color,70%) 57% /**/
-    ); /**/
-    -custom-prompt-text-color-disabled: ladder(
-            -fx-control-inner-background,
-            derive(-fx-control-inner-background, 30%) 56%,
-            derive(-fx-control-inner-background, -30%) 57% /**/ /*        derive(-fx-text-inner-color,-35%) 56%,
-        derive(-fx-text-inner-color,70%) 57% /**/
-    ); /**/
-
-    /*    -custom-color-border: #c3c3c3;/**/
-    -custom-color-border: -fx-outer-border; /**/
-    /*    -custom-color-border: -fx-inner-border;/**/
-
-    /*    -custom-color-mark-modification: linear-gradient(from 0% 0% to 20% 90%, -fx-focus-color, -fx-faint-focus-color);/**/
-    /*    -custom-color-mark-modification: linear-gradient(from 0 0 to 10 20, -custom-color-modification, transparent);/**/
-    /*    -custom-color-mark-modification: linear-gradient(from 0% 0% to 10% 100%, -custom-color-modification, transparent);/**/
-    /*    -custom-color-mark-modification: linear-gradient(from 0px 0px to 8px 8px, -custom-color-modification, -custom-color-modification 50%, transparent);/**/
-    /*    -custom-color-mark-modification: linear-gradient(from 0px 0px to 5px 5px, -custom-color-modification, -custom-color-modification 99%, transparent);/**/
-    -custom-color-mark-modification: linear-gradient(from 0px 0px to 5px 5px, -custom-color-modification, -custom-color-modification 79%, -fx-outer-border 80%, -fx-outer-border 99%, transparent); /**/
-
-    /*    -custom-color-mark-error: linear-gradient(from 0% 0% to 10% 100%, -custom-color-error, transparent);/**/
-    /*    -custom-color-mark-error: linear-gradient(from 0px 0px to 8px 8px, -custom-color-error, -custom-color-error 50%, transparent);/**/
-    /*    -custom-color-mark-error: linear-gradient(from 0px 0px to 5px 5px, -custom-color-error, -custom-color-error 99%, transparent);/**/
-    -custom-color-mark-error: linear-gradient(from 0px 0px to 5px 5px, -custom-color-error, -custom-color-error 79%, -fx-outer-border 80%, -fx-outer-border 99%, transparent); /**/
-
-    /*    -custom-color-mark-new: linear-gradient(from 0% 0% to 10% 100%, -custom-color-new, transparent);/**/
-    /*    -custom-color-mark-new: linear-gradient(from 0px 0px to 8px 8px, -custom-color-new, -custom-color-new 50%, transparent);/**/
-    /*    -custom-color-mark-new: linear-gradient(from 0px 0px to 5px 5px, -custom-color-new, -custom-color-new 99%, transparent);/**/
-    -custom-color-mark-new: linear-gradient(from 0px 0px to 5px 5px, -custom-color-new, -custom-color-new 79%, -fx-outer-border 80%, -fx-outer-border 99%, transparent); /**/
-
-    /*    -custom-color-mark-warning: linear-gradient(from 0% 0% to 10% 100%, -custom-color-warning, transparent);/**/
-    /*    -custom-color-mark-warning: linear-gradient(from 0px 0px to 8px 8px, -custom-color-warning, -custom-color-warning 50%, transparent);/**/
-    /*    -custom-color-mark-warning: linear-gradient(from 0px 0px to 5px 5px, -custom-color-warning, -custom-color-warning 99%, transparent);/**/
-    -custom-color-mark-warning: linear-gradient(from 0px 0px to 5px 5px, -custom-color-warning, -custom-color-warning 79%, -fx-outer-border 80%, -fx-outer-border 99%, transparent); /**/
 
     -custom-color-indicator-ok: lightgreen; /**/
     /*    -custom-color-indicator-ok: yellowgreen;/**/
@@ -536,15 +485,6 @@
 
 .button-small-next > StackPane {
     -fx-background-image: url("icons/navigation/drawable-xxxhdpi/ic_chevron_right_black_24dp.png");
-}
-
-.text-field:focused {
-    -fx-background-color: -fx-focus-color, -fx-text-box-border, -fx-control-inner-background; /**/
-    -fx-background-insets: -0.4, 1, 2; /**/
-    -fx-background-radius: 3.4, 2, 2; /**/
-    /*    -fx-highlight-fill: -fx-accent;/**/
-    /*    -fx-highlight-text-fill: white;/**/
-    -fx-prompt-text-fill: transparent; /**/
 }
 
 /* ====  Even rows  ================================================= */

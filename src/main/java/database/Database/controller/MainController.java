@@ -3,6 +3,7 @@ package database.Database.controller;
 import database.Database.entity.ATS;
 import database.Database.repository.*;
 import database.Database.service.ATSService;
+import database.Database.service.DistrictService;
 import database.Database.service.PersonService;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -24,7 +25,7 @@ public class MainController {
     private final Logger logger = Logger.getLogger(this.getClass());
 
     @FXML
-    private TableView directoryTableView;
+    private TableView atsTableView;
     @FXML
     private Pane additionPane;
     @FXML
@@ -46,7 +47,7 @@ public class MainController {
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
-    private DistrictRepository districtRepository;
+    private DistrictService districtRepository;
 
 
     private AddressController addressController;
@@ -68,131 +69,15 @@ public class MainController {
 
     @PostConstruct
     public void init() {
-        addressController = new AddressController(directoryTableView, additionPane, addressRepository, districtRepository);
-        personController = new PersonController(directoryTableView, additionPane, personService);
-        organizationController = new OrganizationController(directoryTableView, additionPane, organisationRepository);
+        addressController = new AddressController(atsTableView, additionPane, addressRepository, districtRepository);
+        personController = new PersonController(atsTableView, additionPane, personService);
+        organizationController = new OrganizationController(atsTableView, additionPane, organisationRepository);
 //        atsController = new ATSController(additionPane, atsService);
-//        AddressDirectoryAction();
-        initATS();
+        AddressDirectoryAction();
+//        initATS();
     }
 
 
-    private void initATS() {
-        try {
-            Function<ATSController, ObservableValue<ATSController>> property = ReadOnlyObjectWrapper<ATSController>::new;
-
-            atsIdTableColumn.setCellValueFactory(
-                    cellData -> property.apply(cellData.getValue()));
-            atsApplyTableColumn.setCellValueFactory(
-                    cellData -> property.apply(cellData.getValue()));
-            atsUndoTableColumn.setCellValueFactory(
-                    cellData -> property.apply(cellData.getValue()));
-            atsDeleteTableColumn.setCellValueFactory(
-                    cellData -> property.apply(cellData.getValue()));
-
-
-            atsIdTableColumn.setCellFactory(
-                    p -> {
-                        TableCell item = new TableCell<ATSController, ATSController>() {
-                            @Override
-                            public void updateItem(ATSController atsController, boolean empty) {
-                                if (atsController == null) {
-                                    setGraphic(null);
-                                    return;
-                                }
-                                super.updateItem(atsController, empty);
-                                if (empty) {
-                                    setGraphic(null);
-                                } else {
-                                    setGraphic(atsController.getATSNumberTextField());
-                                }
-                            }
-                        };
-                        item.setAlignment(Pos.CENTER);
-                        return item;
-                    });
-
-
-            atsApplyTableColumn.setCellFactory(
-                    p -> {
-                        TableCell item = new TableCell<ATSController, ATSController>() {
-                            @Override
-                            public void updateItem(ATSController atsController, boolean empty) {
-                                if (atsController == null) {
-                                    setGraphic(null);
-                                    return;
-                                }
-                                super.updateItem(atsController, empty);
-                                if (empty) {
-                                    setGraphic(null);
-                                } else {
-                                    setGraphic(atsController.getApplyButton());
-                                }
-                            }
-                        };
-                        item.setAlignment(Pos.CENTER);
-                        return item;
-                    });
-
-
-            atsUndoTableColumn.setCellFactory(
-                    p -> {
-                        TableCell item = new TableCell<ATSController, ATSController>() {
-                            @Override
-                            public void updateItem(ATSController atsController, boolean empty) {
-                                if (atsController == null) {
-                                    setGraphic(null);
-                                    return;
-                                }
-                                super.updateItem(atsController, empty);
-                                if (empty) {
-                                    setGraphic(null);
-                                } else {
-                                    setGraphic(atsController.getUndoButton());
-                                }
-                            }
-                        };
-                        item.setAlignment(Pos.CENTER);
-                        return item;
-                    });
-
-
-            atsDeleteTableColumn.setCellFactory(
-                    p -> {
-                        TableCell item = new TableCell<ATSController, ATSController>() {
-                            @Override
-                            public void updateItem(ATSController atsController, boolean empty) {
-                                if (atsController == null) {
-                                    setGraphic(null);
-                                    return;
-                                }
-                                super.updateItem(atsController, empty);
-                                if (empty) {
-                                    setGraphic(null);
-                                } else {
-                                    setGraphic(atsController.getDeleteButton());
-                                }
-                            }
-                        };
-                        item.setAlignment(Pos.CENTER);
-                        return item;
-                    });
-
-            directoryTableView.getItems().clear();
-
-            List<ATS> list = atsService.findAll();
-            atsControllerList = FXCollections.observableArrayList();
-
-            for (ATS ats : list) {
-                atsControllerList.add(new ATSController(additionPane, ats, atsService));
-            }
-
-            directoryTableView.setItems(atsControllerList);
-        } catch (Exception e) {
-            logger.error("Error for collect ControlPoint");
-            logger.error(e);
-        }
-    }
 
     public void ATSDirectoryAction() {
         atsController.setTable();

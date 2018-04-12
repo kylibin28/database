@@ -30,6 +30,10 @@ public class ATS {
         return ats;
     }
 
+    public void setAtsId(Integer atsId) {
+        this.atsId = atsId;
+    }
+
     @Override
     public String toString() {
         return "ATS{" +
