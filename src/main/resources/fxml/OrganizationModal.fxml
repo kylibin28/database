@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="515.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="database.Database.controller.modalWindows.OrganizationModalController">
+    <children>
+        <TextField fx:id="regNumTextField" layoutX="24.0" layoutY="118.0" prefHeight="25.0" prefWidth="255.0"/>
+        <Label layoutX="24.0" layoutY="95.0" text="Регистрационный номер"/>
+        <Label layoutX="66.0" layoutY="30.0" text="Организация">
+            <font>
+                <Font name="System Bold" size="27.0"/>
+            </font>
+        </Label>
+        <Button fx:id="applyButton" layoutX="46.0" layoutY="427.0" mnemonicParsing="false" onAction="#applyButtonAction"
+                prefHeight="25.0" prefWidth="83.0" text="OK"/>
+        <Button layoutX="162.0" layoutY="427.0" mnemonicParsing="false" onAction="#undoButtonAction" prefHeight="25.0"
+                prefWidth="75.0" text="Отменить"/>
+        <Label layoutX="24.0" layoutY="162.0" text="Название"/>
+        <TextField fx:id="nameTextField" layoutX="24.0" layoutY="185.0" prefHeight="25.0" prefWidth="255.0"/>
+    </children>
+</AnchorPane>

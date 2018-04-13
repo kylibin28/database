@@ -3,9 +3,8 @@ package database.Database.controller;
 import database.Database.controller.modalWindows.AddressModalController;
 import database.Database.entity.Address;
 import database.Database.entity.District;
-import database.Database.navigateElements.*;
 import database.Database.repository.AddressRepository;
-import database.Database.repository.DistrictRepository;
+import database.Database.service.AddressService;
 import database.Database.service.DistrictService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,53 +14,34 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
-public class AddressController implements Controllers {
+public class AddressController {
 
     @FXML
     private TableView directoryTableView;
 
-    @FXML
-    private Pane additionPane;
 
-
-    private AddressRepository addressService;
+    private AddressService addressService;
 
     private DistrictService districtService;
 
 
-    private CustomTextField nameTextField = new CustomTextField(70, 150);
-    private CustomTextField indexTextField = new CustomTextField(220, 100);
-    private CustomTextField streetTextField = new CustomTextField(320, 150);
-    private CustomTextField buildingTextField = new CustomTextField(470, 50);
-    private CustomComboBox districtComboBox;
-
-
-    private ApplyButton applyButton;
-    private UndoButton undoButton;
-    private DeleteButton deleteButton;
-
-    public AddressController(TableView directoryTableView, Pane additionPane, AddressRepository addressService, DistrictService districtService) {
+    public AddressController(TableView directoryTableView, AddressService addressService, DistrictService districtService) {
         this.directoryTableView = directoryTableView;
-        this.additionPane = additionPane;
         this.addressService = addressService;
         this.districtService = districtService;
-
-        ObservableList<District> districtObservableList = FXCollections.observableArrayList(districtService.findAll());
-        districtComboBox = new CustomComboBox(districtObservableList, 520, 150);
 
         ContextMenu contextMenu = new ContextMenu();
         MenuItem itemCreate = new MenuItem("Создать");
         MenuItem itemEdit = new MenuItem("Редактировать");
         MenuItem itemDelete = new MenuItem("Удалить");
-        itemCreate.setOnAction(event -> openModal((Address) directoryTableView.getSelectionModel().getSelectedItem()));
-        itemEdit.setOnAction(event -> openModal(null));
+        itemCreate.setOnAction(event -> openModal(null));
+        itemEdit.setOnAction(event -> openModal((Address) directoryTableView.getSelectionModel().getSelectedItem()));
         itemDelete.setOnAction(event -> deleteRecord());
 
         contextMenu.getItems().addAll(itemCreate, itemEdit, itemDelete);
@@ -70,7 +50,6 @@ public class AddressController implements Controllers {
         directoryTableView.setOnMouseClicked(event -> contextMenu.hide());
     }
 
-    @Override
     public void setTable() {
         ObservableList<Address> list = FXCollections.observableArrayList(addressService.findAll());
 
@@ -103,38 +82,9 @@ public class AddressController implements Controllers {
 
     }
 
-    @Override
-    public void addRecord() {
-        addressService.save(new Address(nameTextField.getText(),
-                Integer.valueOf(indexTextField.getText()), streetTextField.getText(),
-                Integer.valueOf(buildingTextField.getText()), (District) districtComboBox.getValue()));
-        setTable();
-    }
 
-    @Override
     public void deleteRecord() {
-
-    }
-
-    @Override
-    public void updateRecord() {
-
-    }
-
-    @Override
-    public void apply() {
-
-    }
-
-    @Override
-    public void undo() {
-
-    }
-
-    @Override
-    public void setApplyButtonDisable(Boolean isDisable) {
-        applyButton.setDisable(isDisable);
-        undoButton.setDisable(isDisable);
+        addressService.delete((Address) directoryTableView.getSelectionModel().getSelectedItem());
     }
 
     private void openModal(Address address) {
@@ -152,7 +102,9 @@ public class AddressController implements Controllers {
             primaryStage.initModality(Modality.APPLICATION_MODAL);
 
             AddressModalController controller = loader.getController();
-            controller.additionalInit(primaryStage, address, districtService);
+            controller.additionalInit(this, primaryStage, address, addressService, districtService);
+
+            primaryStage.setOnCloseRequest((WindowEvent event) -> setTable());
 
             primaryStage.show();
         } catch (IOException e) {

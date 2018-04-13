@@ -1,39 +1,50 @@
 package database.Database.controller;
 
+import database.Database.controller.modalWindows.PersonModalController;
 import database.Database.entity.Person;
-import database.Database.navigateElements.ApplyButton;
-import database.Database.navigateElements.DeleteButton;
-import database.Database.navigateElements.UndoButton;
 import database.Database.service.PersonService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-public class PersonController implements Controllers{
+import java.io.IOException;
+
+public class PersonController {
 
     @FXML
     private TableView directoryTableView;
 
-    @FXML
-    private Pane additionPane;
-
     private PersonService personService;
 
 
-    private ApplyButton applyButton;
-    private UndoButton undoButton;
-    private DeleteButton deleteButton;
-
-    public PersonController (TableView directoryTableView, Pane additionPane, PersonService personService) {
+    public PersonController (TableView directoryTableView, PersonService personService) {
         this.directoryTableView = directoryTableView;
-        this.additionPane = additionPane;
         this.personService = personService;
+
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem itemCreate = new MenuItem("Создать");
+        MenuItem itemEdit = new MenuItem("Редактировать");
+        MenuItem itemDelete = new MenuItem("Удалить");
+        itemCreate.setOnAction(event -> openModal(null));
+        itemEdit.setOnAction(event -> openModal((Person) directoryTableView.getSelectionModel().getSelectedItem()));
+        itemDelete.setOnAction(event -> deleteRecord());
+
+        contextMenu.getItems().addAll(itemCreate, itemEdit, itemDelete);
+        directoryTableView.setOnContextMenuRequested(event ->
+                contextMenu.show(directoryTableView, event.getScreenX(), event.getScreenY()));
+        directoryTableView.setOnMouseClicked(event -> contextMenu.hide());
     }
 
-    @Override
     public void setTable(){
 
         ObservableList<Person> list = FXCollections.observableArrayList(personService.findAll());
@@ -52,59 +63,34 @@ public class PersonController implements Controllers{
 
         directoryTableView.getColumns().setAll(pasportNumber, FIO, privilege);
         directoryTableView.setItems(list);
-
-        TextField pasportNumberTextField = new TextField();
-        pasportNumberTextField.setPrefWidth(100);
-
-        TextField FIOTextField = new TextField();
-        FIOTextField.setLayoutX(100);
-        FIOTextField.setPrefWidth(250);
-
-        CheckBox privilegeCheckBox = new CheckBox();
-        privilegeCheckBox.setLayoutX(400);
-
-        Button addButton = new Button("Добавить");
-        addButton.setOnAction(e -> {
-            personService.save(new Person(Integer.valueOf(pasportNumberTextField.getText()), FIOTextField.getText(), privilegeCheckBox.isSelected()));
-            setTable();
-        });
-        addButton.setLayoutX(460);
-        additionPane.getChildren().clear();
-        additionPane.getChildren().addAll(pasportNumberTextField, FIOTextField, privilegeCheckBox, addButton);
     }
 
-
-    @Override
-    public void addRecord() {
-//        personService.save(new ATS(Integer.valueOf(additionTextField.getText())));
-        setTable();
-    }
-
-    @Override
     public void deleteRecord() {
-//        personService.delete((ATS) directoryTableView.getSelectionModel().getSelectedItem());
-        setTable();
+        personService.delete((Person) directoryTableView.getSelectionModel().getSelectedItem());
     }
 
-    @Override
-    public void updateRecord() {
-//        additionTextField.setText(String.valueOf(((ATS) directoryTableView.getSelectionModel().getSelectedItem()).getAtsId()));
+    private void openModal(Person person) {
+        try {
+            Stage primaryStage = new Stage();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Object.class.getResource("/fxml/PersonModal.fxml"));
+
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+
+            PersonModalController controller = loader.getController();
+            controller.additionalInit(this, primaryStage, person, personService);
+
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    @Override
-    public void apply(){
-
-    }
-
-    @Override
-    public void undo(){
-
-    }
-
-    @Override
-    public void setApplyButtonDisable(Boolean isDisable) {
-        applyButton.setDisable(isDisable);
-        undoButton.setDisable(isDisable);
-    }
 }

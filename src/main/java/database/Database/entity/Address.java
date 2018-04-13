@@ -70,6 +70,27 @@ public class Address {
         return districtName;
     }
 
+
+    public void setSity(String sity) {
+        this.sity = sity;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setBuildingNumber(Integer buildingNumber) {
+        this.buildingNumber = buildingNumber;
+    }
+
+    public void setDistrictName(District districtName) {
+        this.districtName = districtName;
+    }
+
     @Override
     public String toString() {
         return "Address{" +

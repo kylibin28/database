@@ -42,6 +42,18 @@ public class Person {
         return privilege;
     }
 
+    public void setPasportNumber(Integer pasportNumber) {
+        this.pasportNumber = pasportNumber;
+    }
+
+    public void setFIO(String FIO) {
+        this.FIO = FIO;
+    }
+
+    public void setPrivilege(Boolean privilege) {
+        this.privilege = privilege;
+    }
+
     @Override
     public String toString() {
         return "Person{" +

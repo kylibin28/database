@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="515.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="database.Database.controller.modalWindows.PersonModalController">
+   <children>
+      <TextField fx:id="pasportTextField" layoutX="24.0" layoutY="118.0" prefHeight="25.0" prefWidth="255.0" />
+      <Label layoutX="24.0" layoutY="95.0" text="Номер паспорта" />
+      <Label layoutX="71.0" layoutY="20.0" text="Частное лицо">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="applyButton" layoutX="46.0" layoutY="427.0" mnemonicParsing="false" onAction="#applyButtonAction" prefHeight="25.0" prefWidth="83.0" text="OK" />
+      <Button layoutX="162.0" layoutY="427.0" mnemonicParsing="false" onAction="#undoButtonAction" prefHeight="25.0" prefWidth="75.0" text="Отменить" />
+      <Label layoutX="24.0" layoutY="162.0" text="ФИО" />
+      <TextField fx:id="fioTextField" layoutX="24.0" layoutY="185.0" prefHeight="25.0" prefWidth="255.0" />
+      <CheckBox fx:id="privilegeCheckBox" layoutX="24.0" layoutY="229.0" mnemonicParsing="false" text="Наличие льготы" />
+   </children>
+</AnchorPane>

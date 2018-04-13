@@ -42,6 +42,5 @@
         </menus>
       </MenuBar>
       <TableView fx:id="atsTableView" layoutX="14.0" layoutY="36.0" prefHeight="444.0" prefWidth="773.0" />
-      <Pane fx:id="additionPane" layoutX="14.0" layoutY="486.0" prefHeight="63.0" prefWidth="773.0" />
    </children>
 </AnchorPane>
