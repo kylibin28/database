@@ -16,6 +16,8 @@
                   <MenuItem mnemonicParsing="false" onAction="#AddressDirectoryAction" text="Сведения об адресах" />
                   <MenuItem mnemonicParsing="false" onAction="#OrganizationDirectoryAction" text="Сведения об организациях" />
                   <MenuItem mnemonicParsing="false" onAction="#PersonDirectoryAction" text="Сведения о частных лицах" />
+                  <MenuItem mnemonicParsing="false" onAction="#DistrictDirectoryAction" text="Сведения о районах" />
+                  <MenuItem mnemonicParsing="false" onAction="#RateDirectoryAction" text="Сведения о тарифе" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Оперативные данные">
@@ -41,6 +43,6 @@
             </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="atsTableView" layoutX="14.0" layoutY="36.0" prefHeight="444.0" prefWidth="773.0" />
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="36.0" prefHeight="444.0" prefWidth="773.0" />
    </children>
 </AnchorPane>

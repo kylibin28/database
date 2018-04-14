@@ -1,8 +1,11 @@
 package database.Database.controller;
 
-import database.Database.controller.modalWindows.OrganizationModalController;
-import database.Database.entity.Organisation;
-import database.Database.service.OrganisationService;
+import database.Database.controller.modalWindows.DistrictModalController;
+import database.Database.controller.modalWindows.PersonModalController;
+import database.Database.entity.District;
+import database.Database.entity.Person;
+import database.Database.service.DistrictService;
+import database.Database.service.PersonService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,23 +22,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class OrganizationController {
-
+public class DistrictController {
     @FXML
     private TableView directoryTableView;
 
-    private OrganisationService organisationService;
+    private DistrictService districtService;
 
-    public OrganizationController(TableView directoryTableView, OrganisationService organisationService) {
+    public DistrictController(TableView directoryTableView, DistrictService districtService) {
         this.directoryTableView = directoryTableView;
-        this.organisationService = organisationService;
+        this.districtService = districtService;
 
         ContextMenu contextMenu = new ContextMenu();
         MenuItem itemCreate = new MenuItem("Создать");
         MenuItem itemEdit = new MenuItem("Редактировать");
         MenuItem itemDelete = new MenuItem("Удалить");
         itemCreate.setOnAction(event -> openModal(null));
-        itemEdit.setOnAction(event -> openModal((Organisation) directoryTableView.getSelectionModel().getSelectedItem()));
+        itemEdit.setOnAction(event -> openModal((District) directoryTableView.getSelectionModel().getSelectedItem()));
         itemDelete.setOnAction(event -> deleteRecord());
 
         contextMenu.getItems().addAll(itemCreate, itemEdit, itemDelete);
@@ -44,34 +46,30 @@ public class OrganizationController {
         directoryTableView.setOnMouseClicked(event -> contextMenu.hide());
     }
 
-    public void setTable() {
+    public void setTable(){
 
-        ObservableList<Organisation> list = FXCollections.observableArrayList(organisationService.findAll());
+        ObservableList<District> list = FXCollections.observableArrayList(districtService.findAll());
 
-        TableColumn<Organisation, String> registrationNumber = new TableColumn<>("Регистрационный номер");
-        registrationNumber.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
-        registrationNumber.setPrefWidth(100);
+        TableColumn<Person, String> districtName = new TableColumn<>("Название района");
+        districtName.setCellValueFactory(new PropertyValueFactory<>("districtName"));
+        districtName.setPrefWidth(200);
 
-        TableColumn<Organisation, String> name = new TableColumn<>("Название");
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        name.setPrefWidth(150);
 
-        directoryTableView.getColumns().setAll(registrationNumber, name);
+        directoryTableView.getColumns().setAll(districtName);
         directoryTableView.setItems(list);
-        directoryTableView.getSortOrder().add(registrationNumber);
+        directoryTableView.getSortOrder().add(districtName);
     }
 
     public void deleteRecord() {
-        organisationService.delete((Organisation) directoryTableView.getSelectionModel().getSelectedItem());
+        districtService.delete((District) directoryTableView.getSelectionModel().getSelectedItem());
     }
 
-
-    private void openModal(Organisation organisation) {
+    private void openModal(District district) {
         try {
             Stage primaryStage = new Stage();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Object.class.getResource("/fxml/OrganizationModal.fxml"));
+            loader.setLocation(Object.class.getResource("/fxml/DistrictModal.fxml"));
 
             Parent root = loader.load();
 
@@ -80,12 +78,13 @@ public class OrganizationController {
 
             primaryStage.initModality(Modality.APPLICATION_MODAL);
 
-            OrganizationModalController controller = loader.getController();
-            controller.additionalInit(this, primaryStage, organisation, organisationService);
+            DistrictModalController controller = loader.getController();
+            controller.additionalInit(this, primaryStage, district, districtService);
 
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

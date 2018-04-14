@@ -14,8 +14,12 @@ public class Rate {
     @Column(name = "rateId")
     private Integer rateId;
 
-    @Column(name = "date", nullable = false)
-    private Date date;
+    @Column(name = "year")
+    private Integer year;
+
+    @Column(name = "month")
+    private Integer month;
+
 
     @Column(name = "value", nullable = false)
     private Integer value;
@@ -23,8 +27,9 @@ public class Rate {
     @OneToMany(mappedBy = "rateId")
     private Set<Payment> payment = new HashSet<Payment>();
 
-    public Rate(Date date, Integer value) {
-        this.date = date;
+    public Rate(Integer year, Integer month,  Integer value) {
+        this.month = month;
+        this.year = year;
         this.value = value;
     }
 
@@ -35,20 +40,45 @@ public class Rate {
         return rateId;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
     public Integer getValue() {
         return value;
+    }
+
+
+    public void setRateId(Integer rateId) {
+        this.rateId = rateId;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    public Integer getYear() {
+
+        return year;
+    }
+
+    public Integer getMonth() {
+        return month;
     }
 
     @Override
     public String toString() {
         return "Rate{" +
                 "rateId=" + rateId +
-                ", date=" + date +
+                ", year=" + year +
+                ", month=" + month +
                 ", value=" + value +
                 '}';
     }
+
 }

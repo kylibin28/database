@@ -54,6 +54,7 @@ public class ATSController {
 
         directoryTableView.getColumns().setAll(atsId);
         directoryTableView.setItems(list);
+        directoryTableView.getSortOrder().add(atsId);
 
     }
 

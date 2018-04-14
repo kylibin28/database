@@ -42,7 +42,7 @@ public class AddressModalController {
         this.districtService = districtService;
         this.addressController = addressController;
         if (address != null) {
-            sityTextField.setText(address.getStreet());
+            sityTextField.setText(address.getSity());
             indexTextField.setText(address.getIndex().toString());
             buildingNumberTextField.setText(address.getBuildingNumber().toString());
             streetTextField.setText(address.getStreet());

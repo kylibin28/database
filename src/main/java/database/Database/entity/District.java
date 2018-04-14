@@ -30,6 +30,10 @@ public class District {
         return address;
     }
 
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
     @Override
     public String toString() {
         return districtName;

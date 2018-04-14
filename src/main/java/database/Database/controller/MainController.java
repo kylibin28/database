@@ -11,8 +11,7 @@ public class MainController {
 
 
     @FXML
-    private TableView atsTableView;
-
+    private TableView tableView;
 
     @Autowired
     private ATSService atsService;
@@ -24,12 +23,16 @@ public class MainController {
     private AddressService addressService;
     @Autowired
     private DistrictService districtService;
+    @Autowired
+    private RateService rateService;
 
 
     private AddressController addressController;
     private PersonController personController;
     private ATSController atsController;
     private OrganizationController organizationController;
+    private DistrictController districtController;
+    private RateController rateController;
 
 
     @FXML
@@ -39,28 +42,41 @@ public class MainController {
 
     @PostConstruct
     public void init() {
-        AddressDirectoryAction();
+        firstView();
     }
 
 
-
     public void ATSDirectoryAction() {
-        atsController = new ATSController(atsTableView, atsService);
+        atsController = new ATSController(tableView, atsService);
         atsController.setTable();
     }
 
     public void AddressDirectoryAction() {
-        addressController = new AddressController(atsTableView, addressService, districtService);
+        addressController = new AddressController(tableView, addressService, districtService);
         addressController.setTable();
     }
 
     public void OrganizationDirectoryAction() {
-        organizationController = new OrganizationController(atsTableView, organisationService);
+        organizationController = new OrganizationController(tableView, organisationService);
         organizationController.setTable();
     }
 
     public void PersonDirectoryAction() {
-        personController = new PersonController(atsTableView, personService);
+        personController = new PersonController(tableView, personService);
         personController.setTable();
+    }
+
+    public void DistrictDirectoryAction() {
+        districtController = new DistrictController(tableView, districtService);
+        districtController.setTable();
+    }
+
+    public void RateDirectoryAction() {
+        rateController = new RateController(tableView, rateService);
+        rateController.setTable();
+    }
+
+    private void firstView(){
+
     }
 }

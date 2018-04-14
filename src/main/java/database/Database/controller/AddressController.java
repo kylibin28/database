@@ -79,6 +79,7 @@ public class AddressController {
 
         directoryTableView.getColumns().setAll(idColumn, nameColumn, indexColumn, streetColumn, buildingColumn, districtColumn);
         directoryTableView.setItems(list);
+        directoryTableView.getSortOrder().add(idColumn);
 
     }
 

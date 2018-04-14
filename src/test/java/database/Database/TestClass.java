@@ -47,7 +47,7 @@ public class TestClass {
     @Test
     public void add() {
         districtService.save(new District("Железнодорожный"));
-        rateService.save(new Rate(new Date(System.currentTimeMillis()), 190));
+        rateService.save(new Rate(2010,9, 190));
         atsService.save(new ATS(1));
         personService.save(new Person(432, "Аверкиев Максим Константинович", true));
         addressService.save(new Address("Самара", 443013, "Киевская", 10, districtService.findById("Железнодорожный")));

@@ -55,7 +55,7 @@ public class PersonController {
 
         TableColumn<Person, String> FIO = new TableColumn<>("ФИО");
         FIO.setCellValueFactory(new PropertyValueFactory<>("FIO"));
-        FIO.setPrefWidth(250);
+        FIO.setPrefWidth(300);
 
         TableColumn<Person, String> privilege = new TableColumn<>("Наличие льгот");
         privilege.setCellValueFactory(new PropertyValueFactory<>("privilege"));
@@ -63,6 +63,7 @@ public class PersonController {
 
         directoryTableView.getColumns().setAll(pasportNumber, FIO, privilege);
         directoryTableView.setItems(list);
+        directoryTableView.getSortOrder().add(pasportNumber);
     }
 
     public void deleteRecord() {
