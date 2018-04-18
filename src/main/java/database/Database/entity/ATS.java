@@ -36,8 +36,6 @@ public class ATS {
 
     @Override
     public String toString() {
-        return "ATS{" +
-                "atsId=" + atsId +
-                '}';
+        return atsId.toString();
     }
 }

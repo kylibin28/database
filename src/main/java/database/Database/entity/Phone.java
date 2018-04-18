@@ -46,6 +46,18 @@ public class Phone {
         return atsId;
     }
 
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setConnect(Boolean connect) {
+        isConnect = connect;
+    }
+
+    public void setAtsId(ATS atsId) {
+        this.atsId = atsId;
+    }
+
     @Override
     public String toString() {
         return "Phone{" +

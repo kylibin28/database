@@ -55,7 +55,7 @@ public class PersonController {
 
         TableColumn<Person, String> FIO = new TableColumn<>("ФИО");
         FIO.setCellValueFactory(new PropertyValueFactory<>("FIO"));
-        FIO.setPrefWidth(300);
+        FIO.setPrefWidth(400);
 
         TableColumn<Person, String> privilege = new TableColumn<>("Наличие льгот");
         privilege.setCellValueFactory(new PropertyValueFactory<>("privilege"));

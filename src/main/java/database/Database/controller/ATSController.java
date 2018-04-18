@@ -5,7 +5,6 @@ import database.Database.entity.ATS;
 import database.Database.service.ATSService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -49,8 +47,8 @@ public class ATSController {
         ObservableList<ATS> list = FXCollections.observableArrayList(atsService.findAll());
 
         TableColumn<ATS, String> atsId = new TableColumn<>("Номер АТС");
-        atsId.setPrefWidth(100);
         atsId.setCellValueFactory(new PropertyValueFactory<>("atsId"));
+        atsId.setPrefWidth(100);
 
         directoryTableView.getColumns().setAll(atsId);
         directoryTableView.setItems(list);
@@ -60,6 +58,7 @@ public class ATSController {
 
     public void deleteRecord() {
         atsService.delete((ATS) directoryTableView.getSelectionModel().getSelectedItem());
+        setTable();
     }
 
 

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="database.Database.controller.MainController">
+<AnchorPane prefHeight="546.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="database.Database.controller.MainController">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="800.0">
         <menus>
@@ -22,9 +23,16 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Оперативные данные">
             <items>
-              <MenuItem mnemonicParsing="false" text="Сведения об оплате" />
+              <MenuItem mnemonicParsing="false" onAction="#paymentInformationAction" text="Сведения об оплате" />
+                  <MenuItem mnemonicParsing="false" onAction="#phoneInformationAction" text="Сведения о телефонах клиентов" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Телефоны города">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Работа с клиентами" />
+                  <MenuItem mnemonicParsing="false" text="Оплата за телефон" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Запросы">
             <items>
               <MenuItem mnemonicParsing="false" text="Сумма за месяц" />
@@ -43,6 +51,11 @@
             </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="tableView" layoutX="14.0" layoutY="36.0" prefHeight="444.0" prefWidth="773.0" />
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="85.0" prefHeight="444.0" prefWidth="773.0" />
+      <Label fx:id="currentTableLabel" layoutX="14.0" layoutY="39.0" text="Label">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
